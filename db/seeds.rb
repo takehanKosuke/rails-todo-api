@@ -1,3 +1,4 @@
+puts "記事作成中"
 Article.create!(
   [
     {
@@ -22,3 +23,30 @@ Article.create!(
     },
   ]
 )
+puts "記事作成完了"
+puts "コメント作成中"
+Comment.create!(
+  [
+    {
+      body: 'test comment body1',
+      article_id: 1
+    },
+    {
+      body: 'test comment body2',
+      article_id: 1
+    },
+    {
+      body: 'test comment body3',
+      article_id: 1
+    },
+    {
+      body: 'test comment body4',
+      article_id: 2
+    },
+    {
+      body: 'test comment body5',
+      article_id: 2
+    },
+  ]
+)
+puts "コメント作成完了"
