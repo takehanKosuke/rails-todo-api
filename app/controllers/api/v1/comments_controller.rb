@@ -1,6 +1,11 @@
 module Api
   module V1
     class CommentsController < ApplicationController
+      def index
+        @article = Article.find(params[:article_id])
+        render json: { status: 'SUCCESS', message: 'loaded the comments', data: @article.comments }
+      end
+
       def create
         comment = Comment.new(comment_params)
         if comment.save
