@@ -7,14 +7,15 @@ module Api
       end
 
       def show
-        article = Article.find(params[:id])
-        render json: { status: 'SUCCESS', message: 'loaded the article', data: article }
+        @article = Article.find(params[:id])
+        @comments = Comment.where(id: @article.id)
+        render json: { status: 'SUCCESS', message: 'loaded the article', data: [@article, @comments]}
       end
 
       def create
         article = Article.new(article_params)
         if article.save
-          render json: { status: 'SUCCESS', message: 'loaded the articles', data: articles }
+          render json: { status: 'SUCCESS', message: 'loaded the articles', data: article }
         else
           render json: { status: 'ERROR', message: 'loaded the articles', data: article.errors }
         end
@@ -22,17 +23,17 @@ module Api
 
       def update
         article = Article.find(params[:id])
-        if article.update(params[:id])
+        if article.update(article_params)
           render json: { status: 'SUCCESS', message: 'loaded the articles', data: article }
         else
           render json: { status: 'ERROR', message: 'loaded the articles', data: article.errors }
         end
       end
 
-      def dalete
-        article = Article.find(params[:id])
-        article.destroy
-        render json: { status: 'SUCCESS', message: 'loaded the article', data: article }
+      def destroy
+        @article = Article.find(params[:id])
+        @article.destroy
+        render json: { status: 'SUCCESS', message: 'loaded the article', data: @article }
       end
 
       private
